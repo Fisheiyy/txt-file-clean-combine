@@ -1,0 +1,20 @@
+{
+  "main": "starter.js",
+  "name": "txt-file-clean-combine",
+  "description": "cleans & combines text files.",
+  "version": "1.0.0",
+  "author": "fisheiyy",
+  "dependencies": {
+    "exit": "^0.1.2",
+    "fs-extra": "^10.0.0",
+    "prompt-sync": "^4.2.0",
+    "strip-lines": "^1.0.1",
+    "wait": "^0.4.2"
+  },
+  "repositories": [
+    {
+      "type": "git",
+      "url": "github.com/Fisheiyy/txt-file-clean-combine"
+    }
+  ]
+}
