@@ -8,8 +8,7 @@
     "exit": "^0.1.2",
     "fs-extra": "^10.0.0",
     "prompt-sync": "^4.2.0",
-    "strip-lines": "^1.0.1",
-    "wait": "^0.4.2"
+    "strip-lines": "^1.0.1"
   },
   "repositories": [
     {
