@@ -1,7 +1,7 @@
-const strip = require('strip-lines')
+const neek = require('neek')
 const fs = require('fs-extra')
 const dir = __dirname + '\\to clean or combine\\'
-const equals = "========================================================"
+const remove = require(".\\config.json")
 
 
 function wait(ms) {
@@ -9,6 +9,7 @@ function wait(ms) {
         setTimeout(resolve, ms);
     });
 }
+
 fs.ensureDir(dir, (err) => {
     if (err) {console.log("error", err)}
     console.log("ensured " + dir)
@@ -19,7 +20,7 @@ fs.ensureDir(dir, (err) => {
             var file = dir + files
             fs.readFile(file, 'utf8', (err, data) => {
                 if (err) {console.log("error", err)}
-                var included = data.includes(equals)
+                var included = data.includes(remove['to-remove'])
                 if (included == true) {
                     var stripped = strip(data, 8)
                     fs.writeFile(file, stripped, (err) => {

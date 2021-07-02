@@ -7,8 +7,9 @@
   "dependencies": {
     "exit": "^0.1.2",
     "fs-extra": "^10.0.0",
-    "prompt-sync": "^4.2.0",
-    "strip-lines": "^1.0.1"
+    "minimist": "^1.2.5",
+    "neek": "^1.1.2",
+    "prompt-sync": "^4.2.0"
   },
   "repositories": [
     {

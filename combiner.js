@@ -9,17 +9,17 @@ function wait(ms) {
         setTimeout(resolve, ms);
     });
 }
-fs.ensureFile(combined, (err) => {
+
+fs.readdir(dir, (err, files) => {
     if (err) {console.log("error", err)}
-    fs.writeFile(combined, '', (err) => {
+    if (files.length < 2) {console.log("not enough files found, 2 files required at least"), exit}
+    else {console.log("discovering files")}
+    wait(750)
+    fs.ensureFile(combined, (err) => {
         if (err) {console.log("error", err)}
-        console.log("cleared and ensured COMBINED.txt")
-        wait(1500)
-        fs.readdir(dir, (err, files) => {
+        fs.writeFile(combined, '', (err) => {
             if (err) {console.log("error", err)}
-            if (files.length < 2) {console.log("not enough files found"), exit}
-            else {console.log("discovering files")}
-            wait(750)
+            console.log("cleared and ensured COMBINED.txt")
             files.forEach(files => {
                 console.log("reading contents of " + files)
                 var file = dir + files
