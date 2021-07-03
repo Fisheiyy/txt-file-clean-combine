@@ -65,6 +65,11 @@ if (clean_combine == "combining") {
     wait(3500)
     exit
 }
+if (clean_combine == "reset") {
+    console.log("resetting config")
+    var set = require('child_process').exec('node config_setter.js --clean=false --asked=false --remove=""')
+    set.stdout.pipe(process.stdout)
+}
 }
 else {
     var combine = prompt("do you want to combine files? ")
