@@ -1,4 +1,4 @@
-const fs = require('fs-extra');
+const fs = require('fs-extra')
 const config = require('.\\config.json')
 const args = require('minimist')(process.argv.slice(2))
 const config_dir = __dirname + "\\config.json"
@@ -9,7 +9,7 @@ const exp_clean = `${args["clean"]}`
 const exp_asked = `${args["asked"]}`
 const remove = `${args["remove"]}`
 const debug = `${args["debug"]}`
-
+// if (debug == "true") {console.log()}
 if (debug == "undefined") {
     if (remove == "undefined") {
         config['experimental-cleaning'] = exp_clean

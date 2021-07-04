@@ -1,13 +1,13 @@
 const prompt = require('prompt-sync')()
-const exit = require('exit');
+const exit = require('exit')
 const config = require('.\\config.json')
 const debug = config['debug']
 
 
 function wait(ms) {
     return new Promise((resolve) => {
-        setTimeout(resolve, ms);
-    });
+        setTimeout(resolve, ms)
+    })
 }
 // if (debug == "true") {console.log()}
 if (debug == "true") {
