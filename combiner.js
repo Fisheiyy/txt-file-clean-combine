@@ -2,6 +2,8 @@ const fs = require('fs-extra')
 const exit = require('exit')
 const dir = __dirname + '\\to clean or combine\\'
 const combined = __dirname + '\\COMBINED.txt'
+const filesize = require('file-size');
+const debug = config['debug']
 
 
 function wait(ms) {
@@ -9,7 +11,7 @@ function wait(ms) {
         setTimeout(resolve, ms);
     });
 }
-
+// if (debug == "true") {console.log()}
 fs.readdir(dir, (err, files) => {
     if (err) {console.log("error", err)}
     if (files.length < 2) {console.log("not enough files found, 2 files required at least"), exit}
@@ -21,6 +23,7 @@ fs.readdir(dir, (err, files) => {
             if (err) {console.log("error", err)}
             console.log("cleared and ensured COMBINED.txt")
             files.forEach(files => {
+                // TODO ADD FILESIZE CHECK
                 console.log("reading contents of " + files)
                 var file = dir + files
                 wait(750)
