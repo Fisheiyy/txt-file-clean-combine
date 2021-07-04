@@ -18,7 +18,7 @@ if (debug == "true") {
         set.stdout.pipe(process.stdout)
     }
     if (debug_on == "no") {
-        console.log("debug shall stay enabled")
+        console.log("debug will stay enabled")
     }
 }
 else {
@@ -81,10 +81,10 @@ if (clean_combine == "combining") {
 }
 if (clean_combine == "reset") {
     console.log("resetting config")
-    var set = require('child_process').exec('node config_setter.js --clean=false --asked=false --remove=""')
+    var set = require('child_process').exec('node config_setter.js --clean=false --asked=false --remove="" --debug=false')
     set.stdout.pipe(process.stdout)
 }
-if (combine == "debug") {
+if (clean_combine == "debug") {
     console.log("debug has been enabled")
     var set = require('child_process').exec('node config_setter.js --debug=true')
     set.stdout.pipe(process.stdout)
@@ -107,7 +107,7 @@ else {
     }
     if (combine == "reset") {
         console.log("resetting config")
-        var set = require('child_process').exec('node config_setter.js --clean=false --asked=false')
+        var set = require('child_process').exec('node config_setter.js --clean=false --asked=false --remove="" --debug=false')
         set.stdout.pipe(process.stdout)
     }
     if (combine == "debug") {
