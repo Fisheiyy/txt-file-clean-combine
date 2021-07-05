@@ -31,16 +31,10 @@ fs.ensureDir(dir, (err) => {
             var file = dir + files
             fs.readFile(file, 'utf8', (err, data) => {
                 if (err) {console.log("error", err)}
-                var included = data.includes(remove['to-remove'])
-                if (included == true) {
-                    // TODO ADD TO NEEK DUPE REMOVE
-                    // TODO CHANGE TO STRING-REMOVE-WORDS
-                    fs.writeFile(file, stripped, (err) => {
-                        if (err) {console.log("error", err)}
-                        console.log("file cleaned")
-                    })
-                }
-                else {console.log("file does not need cleaning")}
+                
+                // TODO ADD TO NEEK DUPE REMOVE
+                // TODO CHANGE TO STRING-REMOVE-WORDS
+                console.log("file does not need cleaning")
             })
         })
     })
