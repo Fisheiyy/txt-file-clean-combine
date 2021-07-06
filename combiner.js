@@ -27,7 +27,7 @@ fs.readdir(dir, (err, files) => {
                 var size = sizeof(dir + files)
                 if (size > 536870000) {
                     humanized_size = humanize(size)
-                    console.log("file is too large, " + humanized_size)
+                    console.log("file is too large, " + humanized_size + " out of 536.87MB Maximum")
                     return
                 }
                 // NOTE FILE MAX SIZE IS 536.870888MB OR 0x1fffffe8 BYTES
