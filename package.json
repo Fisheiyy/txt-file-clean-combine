@@ -9,6 +9,7 @@
     "exit": "^0.1.2",
     "file-size": "^1.0.0",
     "fs-extra": "^10.0.0",
+    "letter-count": "^3.2.0",
     "minimist": "^1.2.5",
     "neek": "^1.1.2",
     "prompt-sync": "^4.2.0"

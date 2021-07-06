@@ -1,10 +1,12 @@
 const neek = require('neek')
 const fs = require('fs-extra')
 const dir = __dirname + '\\to clean or combine\\'
-const remove = require(".\\config.json")
+const config = require(".\\config.json")
 const sizeof = require("file-sizeof")
 const removewords = require('@stdlib/string-remove-words')
 const debug = config['debug']
+const lc = require('letter-count')
+const exit = require('exit')
 
 
 function wait(ms) {
@@ -13,10 +15,12 @@ function wait(ms) {
     })
 }
 // if (debug == "true") {console.log()}
+if (config['to-remove'] == "") {console.log("please give a valid string of words to remove"), exit}
 fs.ensureDir(dir, (err) => {
     if (err) {console.log("error", err)}
     console.log("ensured " + dir)
     fs.readdir(dir, (err, files) => {
+        if (err) {console.log("error", err)}
         console.log("discovering files")
         wait(500)
         files.forEach(files => {
@@ -31,10 +35,22 @@ fs.ensureDir(dir, (err) => {
             var file = dir + files
             fs.readFile(file, 'utf8', (err, data) => {
                 if (err) {console.log("error", err)}
-                
-                // TODO ADD TO NEEK DUPE REMOVE
-                // TODO CHANGE TO STRING-REMOVE-WORDS
-                console.log("file does not need cleaning")
+                neek.unique(file, file, (unique) => {
+                    console.log(unique + "lines found")
+                    all_lines = lc.count('-ln', data)
+                    if (all_lines[lines] == unique) {
+                        console.log("no new duplicates found and removed")
+                    }
+                    else {
+                        console.log("found " + unique + " unique lines out of " + all_lines[lines])
+                    }
+                    var cleaned_ofwords = removewords(data, [config['to-remove']], true)
+                    console.log(file + " has been cleaned of " + config['to-remove'])
+                    fs.writeFile(file, cleaned_ofwords, (err) => {
+                        if (err) {console.log("error", err)}
+                        exit
+                    })
+                })
             })
         })
     })
