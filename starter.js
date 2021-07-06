@@ -29,7 +29,7 @@ if (config['experimental-asked'] == "false") {
         set.stdout.pipe(process.stdout)
     }
     if (exp_clean == "no") {
-        console.log("as you wish, my lord")
+        console.log("as you wish")
         var set = require('child_process').exec('node config_setter.js --clean=false --asked=true')
         set.stdout.pipe(process.stdout)
     }
@@ -78,7 +78,7 @@ if (clean_combine == "combining") {
 }
 if (clean_combine == "reset") {
     console.log("resetting config")
-    var set = require('child_process').exec('node config_setter.js --clean=false --asked=false --remove="" --debug=false')
+    var set = require('child_process').exec('node config_setter.js --reset=true')
     set.stdout.pipe(process.stdout)
 }
 if (clean_combine == "debug") {
@@ -86,7 +86,6 @@ if (clean_combine == "debug") {
     var set = require('child_process').exec('node config_setter.js --debug=true')
     set.stdout.pipe(process.stdout)
 }
-else {console.log("invalid answer")}
 }
 else {
     var combine = prompt("do you want to combine files? ")
@@ -102,7 +101,7 @@ else {
     }
     if (combine == "reset") {
         console.log("resetting config")
-        var set = require('child_process').exec('node config_setter.js --clean=false --asked=false --remove="" --debug=false')
+        var set = require('child_process').exec('node config_setter.js --reset=true')
         set.stdout.pipe(process.stdout)
         exit
     }
