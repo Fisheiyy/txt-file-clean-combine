@@ -21,9 +21,6 @@ if (debug == "true") {
         console.log("debug will stay enabled")
     }
 }
-else {
-    console.log("invalid answer")
-}
 
 if (config['experimental-asked'] == "false") {
     var exp_clean = prompt("do you want to try experimental cleaning? ")
@@ -32,15 +29,15 @@ if (config['experimental-asked'] == "false") {
         set.stdout.pipe(process.stdout)
     }
     if (exp_clean == "no") {
+        console.log("okay")
         var set = require('child_process').exec('node config_setter.js --clean=false --asked=true')
         set.stdout.pipe(process.stdout)
     }
     if (exp_clean == "debug") {
-        console.log("debug has been enabled")
-        var set = require('child_process').exec('node config_setter.js --debug=true')
+        console.log("debug enabled, this enables cleaning also")
+        var set = require('child_process').exec('node config_setter.js --clean=true --asked=true --debug=true')
         set.stdout.pipe(process.stdout)
-    }
-    else {console.log("invalid answer")}
+    }  
 }
 
 if (config['experimental-cleaning'] == "true") {
@@ -97,23 +94,22 @@ else {
         console.log("combining")
         var combine = require('child_process').exec('node combiner.js')
         combine.stdout.pipe(process.stdout)
-        wait(3500)
         exit
     }
     if (combine == "no") {
         console.log("okay")
-        wait(500)
         exit
     }
     if (combine == "reset") {
         console.log("resetting config")
         var set = require('child_process').exec('node config_setter.js --clean=false --asked=false --remove="" --debug=false')
         set.stdout.pipe(process.stdout)
+        exit
     }
     if (combine == "debug") {
-        console.log("debug has been enabled")
-        var set = require('child_process').exec('node config_setter.js --debug=true')
+        console.log("debug enabled, this enables cleaning also")
+        var set = require('child_process').exec('node config_setter.js --clean=true --asked=true --debug=true')
         set.stdout.pipe(process.stdout)
+        exit
     }
-    else {console.log("invalid answer")}
 }
