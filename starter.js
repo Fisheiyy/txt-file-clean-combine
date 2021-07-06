@@ -29,7 +29,7 @@ if (config['experimental-asked'] == "false") {
         set.stdout.pipe(process.stdout)
     }
     if (exp_clean == "no") {
-        console.log("okay")
+        console.log("as you wish, my lord")
         var set = require('child_process').exec('node config_setter.js --clean=false --asked=true')
         set.stdout.pipe(process.stdout)
     }
@@ -97,7 +97,7 @@ else {
         exit
     }
     if (combine == "no") {
-        console.log("okay")
+        console.log("as you wish, my lord")
         exit
     }
     if (combine == "reset") {
