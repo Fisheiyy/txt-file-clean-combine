@@ -21,6 +21,7 @@ if (reset == "true") {
     fs.writeFile(config_dir, config_string, (err) => {
         if (err) {console.log("error"), err}
     })
+    exit
 }
 else {
     if (debug_arg == "undefined") {
@@ -55,6 +56,7 @@ else {
             fs.writeFile(config_dir, config_string, (err) => {
                 if (err) {console.log("error"), err}
             })
+            exit
         }
         else {
         config['debug'] = debug_arg
