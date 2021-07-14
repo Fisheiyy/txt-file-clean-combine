@@ -5,10 +5,12 @@ const debug = config['debug']
 const fs = require('fs-extra')
 
 
-function wait(ms) {
-    return new Promise((resolve) => {
-        setTimeout(resolve, ms)
-    })
+function wait(milliseconds) {
+    const date = Date.now();
+    let currentDate = null;
+    do {
+      currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
 }
 // if (debug == "true") {console.log()}
 if (debug == "true") {
@@ -44,7 +46,6 @@ if (config['experimental-cleaning'] == "true") {
         var set_clean = prompt("please enter what you want to clean from files ")
         require('child_process').execSync('node config_setter.js --clean=true --asked=true --remove=' + set_clean, {stdio: 'inherit'})
         wait(650)
-        console.log("cleaning")
         require('child_process').execSync('node cleaner.js', {stdio: 'inherit'})
         wait(1500)
         exit
@@ -54,16 +55,13 @@ if (clean_combine == "both") {
     require('child_process').execSync('node config_setter.js --clean=true --asked=true --remove=' + set_clean, {stdio: 'inherit'})
      
     wait(650)
-    console.log("cleaning")
     require('child_process').execSync('node cleaner.js', {stdio: 'inherit'})
     wait(1500)
-    console.log("combining")
     require('child_process').execSync('node combiner.js', {stdio: 'inherit'})
     wait(3500)
     exit
 }
 if (clean_combine == "combining") {
-    console.log("combining")
     require('child_process').execSync('node combiner.js', {stdio: 'inherit'})
     wait(3500)
     exit
@@ -81,7 +79,6 @@ if (clean_combine == "debug") {
 else {
     var combine = prompt("do you want to combine files? ")
     if (combine == "yes") {
-        console.log("combining")
         require('child_process').execSync('node combiner.js', {stdio: 'inherit'})
         exit
     }
