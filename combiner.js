@@ -24,32 +24,33 @@ fs.readdir(dir, (err, files) => {
     }
     else {
     console.log("discovering files")
-    wait(750)
+    wait(450)
     fs.ensureFile(combined, (err) => {
         if (err) {console.log("error", err)}
         fs.writeFile(combined, '', (err) => {
             if (err) {console.log("error", err)}
+            wait(200)
             console.log("cleared and ensured COMBINED.txt")
             files.forEach(files => {
                 var size = sizeof.sync(dir + files)
                 if (size > 536870000) {
                     humanized_size = humanize(size)
-                    console.log("file is too large, " + humanized_size + " out of 536.87MB Maximum")
+                    console.log("file is too large, " + humanized_size + " /536.87MB Maximum")
                     return
                 }
-                // NOTE FILE MAX SIZE IS 536.870888MB OR 0x1fffffe8 BYTES
+                // MAX FILE SIZE IS 536.870888MB OR 0x1fffffe8 BYTES
                 // THIS WILL STAY UNTIL I DECIDE TO CREATE READ STREAMS
                 // AND WRITE STREAMS FOR THE FILES
                 console.log("reading contents of " + files)
                 var file = dir + files
-                wait(750)
+                wait(350)
                 fs.readFile(file, 'utf8', (err, data) => {
                     if (err) {console.log("error", err)}
-                    console.log("contents of " + file + " has been read")
-                    wait(750)
+                    console.log("contents of " + files + " has been read")
+                    wait(350)
                     fs.appendFile(combined, data, (err) => {
                         if (err) {console.log("error", err)}
-                        console.log("contents of " + file + " has been combined")
+                        console.log("contents of " + files + " has been combined")
                     })
                 })
             })

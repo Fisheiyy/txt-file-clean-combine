@@ -45,10 +45,12 @@ fs.ensureDir(dir, (err) => {
                     if (err) {console.log("error", err)}
                     neek.unique(file, file, (unique) => {
                         if (unique.total == unique.unique) {
-                            console.log(file + " has no new duplicates to remove")
+                            wait(350)
+                            console.log(files + " has no new duplicates to remove")
                         }
                         else {
-                            console.log(file + " file has " + unique.unique + " unique lines out of " + unique.total)
+                            wait(350)
+                            console.log(files + " file has " + unique.unique + " unique lines out of " + unique.total)
                         }
                         var cleaned_ofwords = removewords(data, [config['to-remove']], true)
                         fs.writeFile(file, cleaned_ofwords, (err) => {
