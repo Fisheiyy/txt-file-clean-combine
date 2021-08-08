@@ -4,7 +4,8 @@ const sizeof = require('file-bytes')
 const dir = __dirname + '\\to clean or combine\\'
 const config = require(".\\config.json")
 const humanize = require('pretty-bytes')
-const removewords = require('@stdlib/string-remove-words')
+// const removewords = require('@stdlib/string-remove-words')
+const striplines = require('strip-lines')
 const debug = config['debug']
 const exit = require('exit')
 
@@ -17,7 +18,8 @@ function wait(milliseconds) {
     } while (currentDate - date < milliseconds);
 }
 // if (debug == "true") {console.log()}
-if (config['to-remove'] == "") {console.log("please give a valid string of words to remove"), exit}
+// if (config['to-remove'] == "") {console.log("please give a valid string of words to remove"), exit}
+if (config['to-remove'] == "") {console.log("please give a valid number of lines to remove"), exit}
 fs.ensureDir(dir, (err) => {
     if (err) {console.log("error", err)}
     console.log("ensured " + dir)
@@ -52,7 +54,8 @@ fs.ensureDir(dir, (err) => {
                             wait(350)
                             console.log(files + " file has " + unique.unique + " unique lines out of " + unique.total)
                         }
-                        var cleaned_ofwords = removewords(data, [config['to-remove']], true)
+                        // var cleaned_ofwords = removewords(data, [config['to-remove']], true)
+                        var cleaned_ofwords = striplines(data, config['to-remove'])
                         fs.writeFile(file, cleaned_ofwords, (err) => {
                             if (err) {console.log("error", err)}
                             exit
