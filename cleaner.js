@@ -48,7 +48,7 @@ fs.ensureDir(dir, (err) => {
                     neek.unique(file, file, (unique) => {
                         if (unique.total == unique.unique) {
                             wait(350)
-                            console.log(files + " has no new duplicates to remove")
+                            console.log(files + " has no duplicates to remove")
                         }
                         else {
                             wait(350)

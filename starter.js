@@ -44,7 +44,7 @@ if (config['experimental-cleaning'] == "true") {
     var clean_combine = clean_combine.toLowerCase()
     if (clean_combine == "cleaning") {
         // var set_clean = prompt("please enter what you want to clean from files ")
-        var set_clean = prompt("how many lines do you want to remove from the start of the files?")
+        var set_clean = prompt("how many lines do you want to remove from the start of the files? ")
         require('child_process').execSync('node config_setter.js --clean=true --asked=true --remove=' + set_clean, {stdio: 'inherit'})
         wait(650)
         require('child_process').execSync('node cleaner.js', {stdio: 'inherit'})
@@ -53,7 +53,7 @@ if (config['experimental-cleaning'] == "true") {
     }
 if (clean_combine == "both") {
     // var set_clean = prompt("please enter what you want to clean from files ")
-    var set_clean = prompt("how many lines do you want to remove from the start of the files?")
+    var set_clean = prompt("how many lines do you want to remove from the start of the files? ")
     require('child_process').execSync('node config_setter.js --clean=true --asked=true --remove=' + set_clean, {stdio: 'inherit'})
      
     wait(650)
