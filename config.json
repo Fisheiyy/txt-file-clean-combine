@@ -1,6 +1,6 @@
 {
-    "experimental-cleaning": "false",
-    "experimental-asked": "false",
-    "debug": "false",
-    "to-remove": ""
+    "experimental-cleaning": "true",
+    "experimental-asked": "true",
+    "debug": "undefined",
+    "to-remove": "7"
 }

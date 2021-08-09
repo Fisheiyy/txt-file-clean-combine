@@ -6,7 +6,6 @@ const config = require(".\\config.json")
 const humanize = require('pretty-bytes')
 // const removewords = require('@stdlib/string-remove-words')
 const striplines = require('strip-lines')
-const debug = config['debug']
 const exit = require('exit')
 
 
@@ -17,9 +16,9 @@ function wait(milliseconds) {
       currentDate = Date.now();
     } while (currentDate - date < milliseconds);
 }
-// if (debug == "true") {console.log()}
-// if (config['to-remove'] == "") {console.log("please give a valid string of words to remove"), exit}
-if (config['to-remove'] == "") {console.log("please give a valid number of lines to remove"), exit}
+
+// if (config['to-remove'] == "") {console.log("please give a valid string of words to remove"), exit()}
+if (config['to-remove'] == "") {console.log("please give a valid number of lines to remove"), exit()}
 fs.ensureDir(dir, (err) => {
     if (err) {console.log("error", err)}
     console.log("ensured " + dir)
@@ -27,7 +26,7 @@ fs.ensureDir(dir, (err) => {
         if (err) {console.log("error", err)}
         if (files.length < 1) {
             console.log("not enough files found, 1 file required at least")
-            exit
+            exit()
         }
         else {
             console.log("discovering files")
@@ -58,7 +57,7 @@ fs.ensureDir(dir, (err) => {
                         var cleaned_ofwords = striplines(data, config['to-remove'])
                         fs.writeFile(file, cleaned_ofwords, (err) => {
                             if (err) {console.log("error", err)}
-                            exit
+                            exit()
                         })
                     })
                 })

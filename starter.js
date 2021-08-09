@@ -2,7 +2,6 @@ const prompt = require('prompt-sync')()
 const exit = require('exit')
 const config = require('.\\config.json')
 const debug = config['debug']
-const fs = require('fs-extra')
 
 
 function wait(milliseconds) {
@@ -12,7 +11,7 @@ function wait(milliseconds) {
       currentDate = Date.now();
     } while (currentDate - date < milliseconds);
 }
-// if (debug == "true") {console.log()}
+
 if (debug == "true") {
     var debug_on = prompt("debug mode is on, would you like to turn it off? ")
     if (debug_on == "yes") {
@@ -49,7 +48,7 @@ if (config['experimental-cleaning'] == "true") {
         wait(650)
         require('child_process').execSync('node cleaner.js', {stdio: 'inherit'})
         wait(1500)
-        exit
+        exit()
     }
 if (clean_combine == "both") {
     // var set_clean = prompt("please enter what you want to clean from files ")
@@ -61,12 +60,12 @@ if (clean_combine == "both") {
     wait(1500)
     require('child_process').execSync('node combiner.js', {stdio: 'inherit'})
     wait(3500)
-    exit
+    exit()
 }
 if (clean_combine == "combining") {
     require('child_process').execSync('node combiner.js', {stdio: 'inherit'})
     wait(3500)
-    exit
+    exit()
 }
 if (clean_combine == "reset") {
     console.log("resetting config")
@@ -82,20 +81,20 @@ else {
     var combine = prompt("do you want to combine files? ")
     if (combine == "yes") {
         require('child_process').execSync('node combiner.js', {stdio: 'inherit'})
-        exit
+        exit()
     }
     if (combine == "no") {
         console.log("as you wish, my lord")
-        exit
+        exit()
     }
     if (combine == "reset") {
         console.log("resetting config")
         require('child_process').execSync('node config_setter.js --reset=true', {stdio: 'inherit'})
-        exit
+        exit()
     }
     if (combine == "debug") {
         console.log("debug enabled, this enables cleaning also")
         require('child_process').execSync('node config_setter.js --clean=true --asked=true --debug=true', {stdio: 'inherit'})
-        exit
+        exit()
     }
 }

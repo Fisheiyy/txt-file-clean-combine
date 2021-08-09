@@ -3,7 +3,6 @@ const fs = require('fs-extra')
 const config = require('.\\config.json')
 const args = require('minimist')(process.argv.slice(2))
 const config_dir = __dirname + "\\config.json"
-const debug = config['debug']
 
 
 const exp_clean = `${args["clean"]}`
@@ -11,7 +10,7 @@ const exp_asked = `${args["asked"]}`
 const remove = `${args["remove"]}`
 const debug_arg = `${args["debug"]}`
 const reset = `${args["reset"]}`
-// if (debug == "true") {console.log()}
+
 if (reset == "true") {
     config['experimental-cleaning'] = "false"
     config['experimental-asked'] = "false"
@@ -21,7 +20,7 @@ if (reset == "true") {
     fs.writeFile(config_dir, config_string, (err) => {
         if (err) {console.log("error"), err}
     })
-    exit
+    exit()
 }
 else {
     if (debug_arg == "undefined") {
@@ -33,7 +32,7 @@ else {
                 if (err) {console.log("error"), err}
             })
             console.log("config updated")
-            exit
+            exit()
         }
         else {
         config['experimental-cleaning'] = exp_clean
@@ -44,7 +43,7 @@ else {
             if (err) {console.log("error"), err}
         })
         console.log("config updated")
-        exit
+        exit()
         }
     }
     if (debug_arg !== undefined) {
@@ -56,7 +55,7 @@ else {
             fs.writeFile(config_dir, config_string, (err) => {
                 if (err) {console.log("error"), err}
             })
-            exit
+            exit()
         }
         else {
         config['debug'] = debug_arg
@@ -70,6 +69,6 @@ else {
         if (debug_arg == "false") {
             console.log("debug disabled")
         }}
-        exit
+        exit()
     }
 }
