@@ -1,7 +1,7 @@
 const prompt = require('prompt-sync')()
 const exit = require('exit')
-const config = require('.\\config.json')
-const debug = config['debug']
+const sizeof = require('file-bytes')
+const fs = require('fs-extra')
 
 
 function wait(milliseconds) {
@@ -11,6 +11,25 @@ function wait(milliseconds) {
       currentDate = Date.now();
     } while (currentDate - date < milliseconds);
 }
+
+if (sizeof.sync("config.json") == 0) {
+    console.log("config.json is corrupted, rewriting default config settings...")
+    var config_args = {
+        "experimental-cleaning": "false",
+        "experimental-asked": "false",
+        "debug": "false",
+        "to-remove": ""
+    }
+    console.log(config_args)
+    console.log(JSON.stringify(config_args, null, 4))
+    fs.writeFileSync(".\\config.json", JSON.stringify(config_args, null, 4))
+    wait(250)
+    console.log("config.json has been rewritten, please restart this program")
+    exit()
+}
+
+const config = require('.\\config.json')
+const debug = config['debug']
 
 if (debug == "true") {
     var debug_on = prompt("debug mode is on, would you like to turn it off? ")
@@ -45,37 +64,36 @@ if (config['experimental-cleaning'] == "true") {
         // var set_clean = prompt("please enter what you want to clean from files ")
         var set_clean = prompt("how many lines do you want to remove from the start of the files? ")
         require('child_process').execSync('node config_setter.js --clean=true --asked=true --remove=' + set_clean, {stdio: 'inherit'})
-        wait(650)
+        wait(500)
         require('child_process').execSync('node cleaner.js', {stdio: 'inherit'})
         wait(1500)
         exit()
     }
-if (clean_combine == "both") {
-    // var set_clean = prompt("please enter what you want to clean from files ")
-    var set_clean = prompt("how many lines do you want to remove from the start of the files? ")
-    require('child_process').execSync('node config_setter.js --clean=true --asked=true --remove=' + set_clean, {stdio: 'inherit'})
-     
-    wait(650)
-    require('child_process').execSync('node cleaner.js', {stdio: 'inherit'})
-    wait(1500)
-    require('child_process').execSync('node combiner.js', {stdio: 'inherit'})
-    wait(3500)
-    exit()
-}
-if (clean_combine == "combining") {
-    require('child_process').execSync('node combiner.js', {stdio: 'inherit'})
-    wait(3500)
-    exit()
-}
-if (clean_combine == "reset") {
-    console.log("resetting config")
-    require('child_process').execSync('node config_setter.js --reset=true', {stdio: 'inherit'})
-     
-}
-if (clean_combine == "debug") {
-    console.log("debug has been enabled")
-    require('child_process').execSync('node config_setter.js --debug=true', {stdio: 'inherit'})
-}
+    if (clean_combine == "both") {
+        // var set_clean = prompt("please enter what you want to clean from files ")
+        var set_clean = prompt("how many lines do you want to remove from the start of the files? ")
+        require('child_process').execSync('node config_setter.js --clean=true --asked=true --remove=' + set_clean, {stdio: 'inherit'})
+        wait(500)
+        require('child_process').execSync('node cleaner.js', {stdio: 'inherit'})
+        wait(1500)
+        require('child_process').execSync('node combiner.js', {stdio: 'inherit'})
+        wait(1500)
+        exit()
+    }
+    if (clean_combine == "combining") {
+        require('child_process').execSync('node combiner.js', {stdio: 'inherit'})
+        wait(1500)
+        exit()
+    }
+    if (clean_combine == "reset") {
+        console.log("resetting config")
+        require('child_process').execSync('node config_setter.js --reset=true', {stdio: 'inherit'})
+        
+    }
+    if (clean_combine == "debug") {
+        console.log("debug has been enabled")
+        require('child_process').execSync('node config_setter.js --debug=true', {stdio: 'inherit'})
+    }
 }
 else {
     var combine = prompt("do you want to combine files? ")
