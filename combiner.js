@@ -28,7 +28,7 @@ fs.readdir(dir, (err, files) => {
         fs.writeFile(combined, '', (err) => {
             if (err) {console.log("error", err)}
             wait(200)
-            console.log("cleared/ensured COMBINED.txt")
+            console.log("ensured & cleared COMBINED.txt")
             files.forEach(files => {
                 var size = sizeof.sync(dir + files)
                 if (size > 536870000) {

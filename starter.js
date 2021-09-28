@@ -20,8 +20,6 @@ if (sizeof.sync("config.json") == 0) {
         "debug": "false",
         "to-remove": ""
     }
-    console.log(config_args)
-    console.log(JSON.stringify(config_args, null, 4))
     fs.writeFileSync(".\\config.json", JSON.stringify(config_args, null, 4))
     wait(250)
     console.log("config.json has been rewritten, please restart this program")
@@ -35,7 +33,7 @@ if (debug == "true") {
     var debug_on = prompt("debug mode is on, would you like to turn it off? ")
     if (debug_on == "yes") {
         console.log("debug has been disabled")
-        require('child_process').execSync('node config_setter.js --debug=false', {stdio: 'inherit'})
+        require('child_process').execSync('node config_setter --debug=false', {stdio: 'inherit'})
     }
     if (debug_on == "no") {
         console.log("debug will stay enabled")
@@ -45,15 +43,15 @@ if (debug == "true") {
 if (config['experimental-asked'] == "false") {
     var exp_clean = prompt("do you want to try experimental cleaning? ")
     if (exp_clean == "yes") {
-        require('child_process').execSync('node config_setter.js --clean=true --asked=true', {stdio: 'inherit'})
+        require('child_process').execSync('node config_setter --clean=true --asked=true', {stdio: 'inherit'})
     }
     if (exp_clean == "no") {
         console.log("as you wish")
-        require('child_process').execSync('node config_setter.js --clean=false --asked=true', {stdio: 'inherit'})
+        require('child_process').execSync('node config_setter --clean=false --asked=true', {stdio: 'inherit'})
     }
     if (exp_clean == "debug") {
         console.log("debug enabled, this enables cleaning also")
-        require('child_process').execSync('node config_setter.js --clean=true --asked=true --debug=true', {stdio: 'inherit'})
+        require('child_process').execSync('node config_setter --clean=true --asked=true --debug=true', {stdio: 'inherit'})
     }  
 }
 
@@ -63,56 +61,56 @@ if (config['experimental-cleaning'] == "true") {
     if (clean_combine == "cleaning") {
         // var set_clean = prompt("please enter what you want to clean from files ")
         var set_clean = prompt("how many lines do you want to remove from the start of the files? ")
-        require('child_process').execSync('node config_setter.js --clean=true --asked=true --remove=' + set_clean, {stdio: 'inherit'})
+        require('child_process').execSync('node config_setter --clean=true --asked=true --remove=' + set_clean, {stdio: 'inherit'})
         wait(500)
-        require('child_process').execSync('node cleaner.js', {stdio: 'inherit'})
+        require('child_process').execSync('node cleaner', {stdio: 'inherit'})
         wait(1500)
         exit()
     }
     if (clean_combine == "both") {
         // var set_clean = prompt("please enter what you want to clean from files ")
         var set_clean = prompt("how many lines do you want to remove from the start of the files? ")
-        require('child_process').execSync('node config_setter.js --clean=true --asked=true --remove=' + set_clean, {stdio: 'inherit'})
+        require('child_process').execSync('node config_setter --clean=true --asked=true --remove=' + set_clean, {stdio: 'inherit'})
         wait(500)
-        require('child_process').execSync('node cleaner.js', {stdio: 'inherit'})
+        require('child_process').execSync('node cleaner', {stdio: 'inherit'})
         wait(1500)
-        require('child_process').execSync('node combiner.js', {stdio: 'inherit'})
+        require('child_process').execSync('node combiner', {stdio: 'inherit'})
         wait(1500)
         exit()
     }
     if (clean_combine == "combining") {
-        require('child_process').execSync('node combiner.js', {stdio: 'inherit'})
+        require('child_process').execSync('node combiner', {stdio: 'inherit'})
         wait(1500)
         exit()
     }
     if (clean_combine == "reset") {
         console.log("resetting config")
-        require('child_process').execSync('node config_setter.js --reset=true', {stdio: 'inherit'})
+        require('child_process').execSync('node config_setter --reset=true', {stdio: 'inherit'})
         
     }
     if (clean_combine == "debug") {
         console.log("debug has been enabled")
-        require('child_process').execSync('node config_setter.js --debug=true', {stdio: 'inherit'})
+        require('child_process').execSync('node config_setter --debug=true', {stdio: 'inherit'})
     }
 }
 else {
     var combine = prompt("do you want to combine files? ")
     if (combine == "yes") {
-        require('child_process').execSync('node combiner.js', {stdio: 'inherit'})
+        require('child_process').execSync('node combiner', {stdio: 'inherit'})
         exit()
     }
     if (combine == "no") {
-        console.log("as you wish, my lord")
+        console.log("as you wish")
         exit()
     }
     if (combine == "reset") {
         console.log("resetting config")
-        require('child_process').execSync('node config_setter.js --reset=true', {stdio: 'inherit'})
+        require('child_process').execSync('node config_setter --reset=true', {stdio: 'inherit'})
         exit()
     }
     if (combine == "debug") {
         console.log("debug enabled, this enables cleaning also")
-        require('child_process').execSync('node config_setter.js --clean=true --asked=true --debug=true', {stdio: 'inherit'})
+        require('child_process').execSync('node config_setter --clean=true --asked=true --debug=true', {stdio: 'inherit'})
         exit()
     }
 }

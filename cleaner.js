@@ -21,7 +21,7 @@ function wait(milliseconds) {
 if (config['to-remove'] == "") {console.log("please give a valid number of lines to remove"), exit()}
 fs.ensureDir(dir, (err) => {
     if (err) {console.log("error", err)}
-    console.log("ensured " + dir)
+    console.log("ensured .\\to clean or combine")
     fs.readdir(dir, (err, files) => {
         if (err) {console.log("error", err)}
         if (files.length < 1) {
